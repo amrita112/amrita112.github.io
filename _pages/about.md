@@ -18,7 +18,7 @@ selected_papers: false # includes a list of papers marked as "selected={true}"
 social: false # includes social icons at the bottom of the page
 ---
 
-I'm a neuroscientist, and an aspiring writer. I'm interested in solving problems that matter.
+I'm a neuroscientist, an aspiring writer. I'm eager to learn about the world, and I want to work on problems that matter.
 
 I work as a clinical research scientist at [Bionic Sight](https://www.bionicsightllc.com/), where we are developing treatments for advanced stage blindness. I did a PhD in neuroscience at [Johns Hopkins University](https://neuroscience.jhu.edu/) and [Janelia Research Campus](https://www.janelia.org/). For my PhD, I worked on the role of different types of neurons in the motor cortex. You can find a list of my publications [here](https://scholar.google.com/citations?user=h98eTlQAAAAJ&hl=en)
 
