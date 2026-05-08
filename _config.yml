@@ -4,16 +4,14 @@
 
 title: blank # the website title (if blank, full name will be used instead)
 first_name: Amrita
-middle_name: 
+middle_name:
 last_name: Singh
-contact_note: >
-  The fastest way to reach me is by emailing amsi.1994 [at] gmail.com.
-description: > # the ">" symbol means to ignore newlines until "footer_text:"
-  A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
+contact_note: # leave blank — your email is already in the about copy. Anything you put here renders under the social icons on the home page.
+description: > # the ">" symbol means to ignore newlines until "footer_text:" — TODO: write your one-line site description (used for SEO + previews)
+  TODO write site description
 footer_text: >
-  Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme.
-  Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
-keywords: 
+  © Amrita Singh. Built with <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> and the <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme.
+keywords: neuroscience, writing, fiction, public policy, Learning To Be Happy
 lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
 icon: # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
 
@@ -49,7 +47,7 @@ rss_icon: true
 
 navbar_fixed: true
 footer_fixed: true
-search_enabled: true
+search_enabled: false
 socials_in_search: true
 bib_search: true
 
@@ -87,7 +85,7 @@ bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 # -----------------------------------------------------------------------------
 
 blog_name: Learning To Be Happy # blog_name will be displayed in your blog page
-blog_description: a simple whitespace theme for academics
+blog_description: A personal blog about popular science, mental health and other shower thoughts
 permalink: /blog/:year/:title/
 lsi: false # produce an index for related posts
 
@@ -119,15 +117,11 @@ disqus_shortname: al-folio # put your disqus shortname
 # https://help.disqus.com/en/articles/1717111-what-s-a-shortname
 
 # External sources.
-# If you have blog posts published on medium.com or other external sources,
-# you can display them in your blog by adding a link to the RSS feed.
+# Posts from Substack are pulled in via RSS at build time so the /blog/ page
+# mirrors the Substack feed.
 external_sources:
-  - name: medium.com
-    rss_url: https://medium.com/@al-folio/feed
-  - name: Google Blog
-    posts:
-      - url: https://blog.google/technology/ai/google-gemini-update-flash-ai-assistant-io-2024/
-        published_date: 2024-05-14
+  - name: Substack
+    rss_url: https://learningtobehappy.substack.com/feed
 
 # -----------------------------------------------------------------------------
 # Newsletter
@@ -148,17 +142,14 @@ collections:
       layout: post
     output: true
     permalink: /:collection/:title/
-  projects:
-    output: true
-    permalink: /:collection/:title/
 
 announcements:
-  enabled: true
+  enabled: false # _news/ collection is not used; flip to true if you start adding news items
   scrollable: true # adds a vertical scroll bar if there are more than 3 news items
   limit: 5 # leave blank to include all the news in the `_news` folder
 
 latest_posts:
-  enabled: true
+  enabled: false # turn back on if you want a "latest posts" block on the home page
   scrollable: true # adds a vertical scroll bar if there are more than 3 new posts items
   limit: 3 # leave blank to include all the blog posts
 
@@ -197,7 +188,6 @@ exclude:
   - _news/
   - package.json
   - package-lock.json
-  - _pages/about_einstein.md
   - purgecss.config.js
   - README.md
   - readme_preview/
@@ -213,7 +203,6 @@ plugins:
   - jekyll-feed
   - jekyll-get-json
   - jekyll-imagemagick
-  - jekyll-jupyter-notebook
   - jekyll-link-attributes
   - jekyll-minifier
   - jekyll-paginate-v2
@@ -396,7 +385,7 @@ enable_bing_verification: false # enables bing site verification
 enable_masonry: true # enables automatic project cards arrangement
 enable_math: true # enables math typesetting (uses MathJax)
 enable_tooltips: false # enables automatic tooltip links generated for each section titles on pages and posts
-enable_darkmode: true # enables switching between light/dark modes
+enable_darkmode: false # set to true to bring back the light/dark theme toggle in the navbar
 enable_navbar_social: false # enables displaying social links in the navbar on the about page
 enable_project_categories: true # enables categorization of projects into multiple categories
 enable_medium_zoom: true # enables image zoom feature (as on medium.com)

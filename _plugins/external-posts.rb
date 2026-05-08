@@ -32,11 +32,21 @@ module ExternalPosts
     def process_entries(site, src, entries)
       entries.each do |e|
         puts "...fetching #{e.url}"
+        thumbnail = nil
+        # RSS <enclosure url="..."/> — Substack puts the post preview image here.
+        thumbnail = e.enclosure_url if e.respond_to?(:enclosure_url) && e.enclosure_url
+        # Fallback: scrape the first <img> from the post content.
+        if thumbnail.nil? && e.content
+          if (m = e.content.match(/<img[^>]+src=["']([^"']+)["']/i))
+            thumbnail = m[1]
+          end
+        end
         create_document(site, src['name'], e.url, {
           title: e.title,
           content: e.content,
           summary: e.summary,
-          published: e.published
+          published: e.published,
+          thumbnail: thumbnail
         })
       end
     end
@@ -62,6 +72,7 @@ module ExternalPosts
       doc.data['description'] = content[:summary]
       doc.data['date'] = content[:published]
       doc.data['redirect'] = url
+      doc.data['thumbnail'] = content[:thumbnail] if content[:thumbnail]
       site.collections['posts'].docs << doc
     end
 
