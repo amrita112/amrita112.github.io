@@ -1,6 +1,8 @@
+require 'cgi'
 require 'feedjira'
 require 'httparty'
 require 'jekyll'
+require 'json'
 require 'nokogiri'
 require 'time'
 
@@ -23,31 +25,67 @@ module ExternalPosts
     end
 
     def fetch_from_rss(site, src)
-      # Some feeds (Substack in particular) return an HTML interstitial to
-      # default HTTP clients, which Feedjira can't parse. Send a realistic
-      # User-Agent and follow redirects, then parse defensively so a flaky
-      # feed never breaks the whole site build.
+      # Try the feed directly first. Some feeds (Substack in particular) block
+      # cloud-runner IPs with HTTP 403, in which case we fall back to the free
+      # rss2json proxy, which fetches the feed from its own servers and
+      # returns JSON we can parse without Feedjira.
       headers = {
         "User-Agent" => "Mozilla/5.0 (compatible; al-folio Jekyll site builder)",
         "Accept" => "application/rss+xml, application/atom+xml, application/xml, text/xml, */*"
       }
-      response = HTTParty.get(src['rss_url'], headers: headers, follow_redirects: true)
-      if response.nil? || response.body.nil? || response.body.strip.empty?
-        warn "[external-posts] empty response from #{src['rss_url']} — skipping"
+      response = HTTParty.get(src['rss_url'], headers: headers, follow_redirects: true) rescue nil
+      direct_ok = response && response.code.to_i.between?(200, 299) && !response.body.to_s.strip.empty?
+
+      if direct_ok
+        begin
+          feed = Feedjira.parse(response.body)
+          if feed.respond_to?(:entries) && feed.entries && !feed.entries.empty?
+            process_entries(site, src, feed.entries)
+            return
+          end
+          warn "[external-posts] direct fetch parsed but yielded no entries — trying rss2json"
+        rescue StandardError => e
+          warn "[external-posts] direct parse failed (#{e.class}: #{e.message}) — trying rss2json"
+        end
+      else
+        code = response ? response.code : 'no response'
+        warn "[external-posts] direct fetch returned HTTP #{code} — trying rss2json"
+      end
+
+      fetch_via_rss2json(site, src)
+    end
+
+    def fetch_via_rss2json(site, src)
+      url = "https://api.rss2json.com/v1/api.json?rss_url=#{CGI.escape(src['rss_url'])}"
+      response = HTTParty.get(url) rescue nil
+      if response.nil? || response.code.to_i != 200
+        warn "[external-posts] rss2json HTTP #{response&.code} for #{src['rss_url']} — giving up"
         return
       end
-      unless response.code.to_i.between?(200, 299)
-        warn "[external-posts] HTTP #{response.code} from #{src['rss_url']} — skipping"
+      data = JSON.parse(response.body) rescue nil
+      unless data.is_a?(Hash) && data['status'] == 'ok' && data['items'].is_a?(Array)
+        warn "[external-posts] rss2json returned bad payload for #{src['rss_url']} — giving up"
+        warn "[external-posts] first 200 chars: #{response.body[0, 200].inspect}"
         return
       end
-      begin
-        feed = Feedjira.parse(response.body)
-      rescue Feedjira::NoParserAvailable, StandardError => e
-        warn "[external-posts] could not parse #{src['rss_url']} (#{e.class}: #{e.message}) — skipping"
-        warn "[external-posts] first 200 chars of body: #{response.body[0, 200].inspect}"
-        return
+      data['items'].each do |item|
+        published = (Time.parse(item['pubDate']) rescue Time.now)
+        thumbnail = item['thumbnail']
+        thumbnail = nil if thumbnail.is_a?(String) && thumbnail.strip.empty?
+        # rss2json sometimes leaves `thumbnail` blank; fall back to scraping the body
+        if thumbnail.nil? && item['content']
+          if (m = item['content'].match(/<img[^>]+src=["']([^"']+)["']/i))
+            thumbnail = m[1]
+          end
+        end
+        create_document(site, src['name'], item['link'], {
+          title: item['title'],
+          content: item['content'],
+          summary: item['description'],
+          published: published,
+          thumbnail: thumbnail
+        })
       end
-      process_entries(site, src, feed.entries) if feed.respond_to?(:entries) && feed.entries
     end
 
     def process_entries(site, src, entries)
