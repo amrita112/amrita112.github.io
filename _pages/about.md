@@ -17,9 +17,9 @@ social: true # shows the social icons + contact_note at the bottom of the page
 # Latest Substack posts will surface here automatically — controlled by `latest_posts.enabled` in _config.yml.
 ---
 
-I'm a neuroscientist, an aspiring writer. I'm eager to learn about the world, and I want to work on problems that matter.
+I'm a neuroscientist, writer, and public policy enthusiast. I'm eager to learn about the world, and I want to work on problems that matter.
 
-I work as a clinical research scientist at [Bionic Sight](https://www.bionicsightllc.com/), where we are developing treatments for advanced stage blindness. I did a PhD in neuroscience at [Johns Hopkins University](https://neuroscience.jhu.edu/) and [Janelia Research Campus](https://www.janelia.org/). For my PhD, I worked on the role of different types of neurons in the motor cortex. You can find a list of my publications [here](https://scholar.google.com/citations?user=h98eTlQAAAAJ&hl=en).
+In my most recent role as clinical research scientist at [Bionic Sight](https://www.bionicsightllc.com/), I worked on a treatment for advanced stage blindness. I did a PhD in neuroscience at [Johns Hopkins University](https://neuroscience.jhu.edu/) and [Janelia Research Campus](https://www.janelia.org/). For my PhD, I studied the role of different types of neurons in the motor cortex. You can find a list of my publications [here](https://scholar.google.com/citations?user=h98eTlQAAAAJ&hl=en).
 
 I have always wanted to be a writer. In our beautiful internet age, most people can be whatever they choose, if they put in the work. So I started a [blog](https://learningtobehappy.substack.com/) and various other writing projects.
 
