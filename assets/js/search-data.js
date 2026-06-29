@@ -37,7 +37,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-ऋतू-हिरवा",
+        },{id: "post-axioms",
+      
+        title: 'Axioms <svg width="1.2rem" height="1.2rem" top=".5rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+      
+      description: "Why all books should start with maps, and why political debates are meaningless",
+      section: "Posts",
+      handler: () => {
+        
+          window.open("https://learningtobehappy.substack.com/p/axioms", "_blank");
+        
+      },
+    },{id: "post-ऋतू-हिरवा",
       
         title: 'ऋतू हिरवा <svg width="1.2rem" height="1.2rem" top=".5rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
       
@@ -134,17 +145,6 @@ ninja.data = [{
       handler: () => {
         
           window.open("https://learningtobehappy.substack.com/p/the-content-deluge", "_blank");
-        
-      },
-    },{id: "post-who-wants-to-live-forever",
-      
-        title: 'Who Wants To Live Forever? <svg width="1.2rem" height="1.2rem" top=".5rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
-      
-      description: "A ramble through the park",
-      section: "Posts",
-      handler: () => {
-        
-          window.open("https://learningtobehappy.substack.com/p/who-wants-to-live-forever", "_blank");
         
       },
     },{
