@@ -37,7 +37,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-what-next-for-the-cjp-movement",
+        },{id: "post-is-there-too-much-stuff-in-the-world",
+      
+        title: 'Is There Too Much Stuff In The World? <svg width="1.2rem" height="1.2rem" top=".5rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+      
+      description: "A case of existential panic",
+      section: "Posts",
+      handler: () => {
+        
+          window.open("https://learningtobehappy.substack.com/p/is-there-too-much-stuff-in-the-world", "_blank");
+        
+      },
+    },{id: "post-what-next-for-the-cjp-movement",
       
         title: 'What next for the CJP movement? <svg width="1.2rem" height="1.2rem" top=".5rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
       
@@ -134,17 +145,6 @@ ninja.data = [{
       handler: () => {
         
           window.open("https://learningtobehappy.substack.com/p/diary-of-a-mother-to-be", "_blank");
-        
-      },
-    },{id: "post-six-little-things-that-make-me-happy",
-      
-        title: 'Six Little Things That Make Me Happy <svg width="1.2rem" height="1.2rem" top=".5rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
-      
-      description: "A non-serious essay about nice things",
-      section: "Posts",
-      handler: () => {
-        
-          window.open("https://learningtobehappy.substack.com/p/six-little-things-that-make-me-happy", "_blank");
         
       },
     },{
